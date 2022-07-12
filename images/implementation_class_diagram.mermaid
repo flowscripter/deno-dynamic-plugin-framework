@@ -1,0 +1,45 @@
+classDiagram
+    class PluginManager {
+        <<interface>>
+    }
+
+    class BasePluginManager {
+    }
+
+    class ExtensionPointRegistry {
+        <<interface>>
+    }
+
+    class ExtensionRegistry {
+        <<interface>>
+    }
+
+    class PluginRegistry {
+        <<interface>>
+    }
+
+    class PluginRepository {
+        <<interface>>
+    }
+
+    class AbstractPluginRepository {
+    }
+
+    class InMemoryPluginRegistry {
+    }
+
+    class InMemoryExtensionRegistry {
+    }
+
+    class InMemoryExtensionPointRegistry {
+    }
+
+    PluginManager <|.. BasePluginManager
+    ExtensionPointRegistry <|.. InMemoryExtensionPointRegistry
+    ExtensionRegistry <|.. InMemoryExtensionRegistry
+    PluginRegistry <|.. InMemoryPluginRegistry
+    BasePluginManager --> ExtensionPointRegistry
+    BasePluginManager --> ExtensionRegistry
+    BasePluginManager --> PluginRegistry
+    BasePluginManager --> "1..*" PluginRepository
+    PluginRepository <|.. AbstractPluginRepository

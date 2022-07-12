@@ -1,0 +1,17 @@
+classDiagram
+    class PluginManager {
+        <<interface>>
+        registerExtensionPoint(extensionPointId)
+        getRegisteredExtensionPoints() Iterable
+        registerPluginsByExtensionPoint(extensionPointId)
+        getRegisteredPlugins() Plugin[]
+        getExtensions(extensionPointId) ExtensionInfo[]
+        instantiate(extensionHandle, hostData: any) Extension
+    }
+
+    class ExtensionInfo {
+        <<interface>>
+        extensionHandle
+        extensionData
+        pluginData
+    }

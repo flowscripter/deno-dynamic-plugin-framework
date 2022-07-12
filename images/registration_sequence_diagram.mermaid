@@ -1,0 +1,19 @@
+%%{init: { "sequence": { "mirrorActors":false }}}%%
+sequenceDiagram
+    HostApplication->>PluginManager:<<static import>>
+    HostApplication->>PluginManager:register(EXTENSION_POINT_1_ID)
+    activate PluginManager
+    deactivate PluginManager
+    Note over PluginRepository1,PluginRepository2: May use an index or scan plugins directly
+    HostApplication->>PluginManager:registerPluginsByExtensionPoint(EXTENSION_POINT_1_ID)
+    activate PluginManager
+    PluginManager->>PluginRepository1:scanForPlugins(EXTENSION_POINT_1_ID)
+    activate PluginRepository1
+    PluginRepository1-->>PluginManager:ExtensionInfo[]
+    deactivate PluginRepository1
+    PluginManager->>PluginRepository2:scanForPlugins(EXTENSION_POINT_1_ID)
+    activate PluginRepository2
+    PluginRepository2-->>PluginManager:ExtensionInfo[]
+    deactivate PluginRepository2
+    PluginManager-->>HostApplication:ExtensionInfo[]
+    deactivate PluginManager

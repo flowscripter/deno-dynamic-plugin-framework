@@ -1,0 +1,22 @@
+%%{init: { "sequence": { "mirrorActors":false }}}%%
+sequenceDiagram
+    HostApplication->>PluginManager:getExtensions(EXTENSION_POINT_1_ID)
+    activate PluginManager
+    PluginManager->>PluginManager:filterExtensions
+    PluginManager->>HostApplication:ExtensionInfo[]
+    deactivate PluginManager
+    HostApplication->>HostApplication:select Extension1
+    HostApplication->>PluginManager:instantiate(Extension1Handle)
+    activate PluginManager
+    PluginManager->>Plugin1:<<dynamic import>>
+    Plugin1-->>PluginManager:Extension1Factory
+    PluginManager->>Extension1Factory:create()
+    activate Extension1Factory
+    Extension1Factory->>Extension1:<<new>>
+    Extension1Factory-->>PluginManager:Extension1
+    deactivate Extension1Factory
+    PluginManager-->>HostApplication:Extension1
+    deactivate PluginManager
+    HostApplication->>Extension1:extensionPoint1Method
+    activate Extension1
+    deactivate Extension1
